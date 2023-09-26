@@ -1,6 +1,7 @@
 import boto3
 import logging
 from datetime import datetime
+from pytz import timezone
 
 # Set up the logger
 logger = logging.getLogger(__name__)
@@ -30,7 +31,7 @@ def create_backup_with_tag():
         client = boto3.client('rds')
 
         # Get the current date and time for the tag and snapshot identifier
-        current_date_time = datetime.now()
+        current_date_time = datetime.now(timezone("Asia/Kolkata"))
         current_date_time_str = current_date_time.strftime("%m-%d-%Y-%H-%M-%S")
         tag_name = current_date_time.strftime("%m-%d-%Y")
 
