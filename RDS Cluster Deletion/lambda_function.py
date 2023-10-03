@@ -1,6 +1,7 @@
 import boto3
 import logging
 from datetime import datetime, timedelta
+from pytz import timezone
 
 # Set up the logger
 logger = logging.getLogger(__name__)
@@ -23,7 +24,7 @@ def delete_old_snapshots():
         client = boto3.client('rds')
         
         # Calculate the date 7 days ago
-        filter_date = datetime.now() - timedelta(days=7)
+        filter_date = datetime.now(timezone("Asia/Kolkata")) - timedelta(days=7)
         tag_name = filter_date.strftime("%m-%d-%Y")
         logger.info(f"Filter date: {tag_name}")
         
